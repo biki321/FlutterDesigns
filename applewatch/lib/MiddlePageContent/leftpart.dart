@@ -5,8 +5,9 @@ class LeftPart extends StatelessWidget {
   Widget build(BuildContext context) {
  
     return Container(
-                color: Colors.white,
+                
                 decoration: BoxDecoration(
+                  color: Colors.white,
                   borderRadius: BorderRadius.circular(10),
                 ),
                 width: MediaQuery.of(context).size.width * 0.30,
