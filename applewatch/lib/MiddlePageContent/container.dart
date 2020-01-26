@@ -36,7 +36,7 @@ class MiddlePageContainer extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              LeftPart(),
+              LeftPart( "assets/applewatch.jpg" ),
            RightPart(),
             ],
           ),
