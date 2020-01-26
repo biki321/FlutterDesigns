@@ -18,8 +18,13 @@ class _LeftPartState extends State<LeftPart> {
   @override
   Widget build(BuildContext context) {
     return Container(
+<<<<<<< HEAD
                
+=======
+                
+>>>>>>> e8ea9c807f24c4a44cb5e16c67755c9b93a70323
                 decoration: BoxDecoration(
+                  color: Colors.white,
                   borderRadius: BorderRadius.circular(10),
                    color: Colors.white,
                 ),
