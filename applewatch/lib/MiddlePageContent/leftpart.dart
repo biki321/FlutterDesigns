@@ -1,17 +1,45 @@
 import 'package:flutter/material.dart';
 
 class LeftPart extends StatefulWidget {
-  LeftPart({this.mainImgPath, Key key}) : super(key: key);
+  //LeftPart({this.mainImgPath="assets/applewatch.jpg", this.changeBorderOfSmallImg, Key key})
+  LeftPart(
+      {this.mainImgPath = "assets/applewatch.jpg",
+      this.changeBorderOfSmallImg});
+
   String mainImgPath;
+  Function(String) changeBorderOfSmallImg;
 
   @override
-  //_LeftPartState createState() => _LeftPartState(mainImgPath:mainImgPath);
   _LeftPartState createState() => _LeftPartState();
 }
 
 class _LeftPartState extends State<LeftPart> {
-  //_LeftPartState({this.mainImgPath});
-  //String mainImgPath;
+  List<String> paths = [
+    "assets/frontview.jpg",
+    "assets/normalview.png",
+    "assets/backview.jpg",
+    "assets/applewatch.jpg",
+  ];
+  int index = 0;
+  void rightImg() {
+    index += 1;
+    if (index > 3) {
+      index = 0;
+    }
+    //widget.mainImgPath = paths[index];
+
+    widget.changeBorderOfSmallImg(paths[index]);
+  }
+
+  void leftImg() {
+    index -= 1;
+    if (index < 0) {
+      index = 3;
+    }
+    //widget.mainImgPath = paths[index];
+
+    widget.changeBorderOfSmallImg(paths[index]);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +50,6 @@ class _LeftPartState extends State<LeftPart> {
       ),
       width: MediaQuery.of(context).size.width * 0.30,
       height: MediaQuery.of(context).size.height * 0.60,
-      //padding: EdgeInsets.symmetric(horizontal: 90, vertical: 80),
       child: Stack(
         children: <Widget>[
           Center(
@@ -38,15 +65,17 @@ class _LeftPartState extends State<LeftPart> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Icon(
-                  Icons.arrow_left,
-                  color: Colors.black26,
-                  size: 70,
+                IconButton(
+                  onPressed: leftImg,
+                  icon: Icon(Icons.arrow_left),
+                  iconSize: 80,
+                  color: Colors.black12,
                 ),
-                Icon(
-                  Icons.arrow_right,
-                  color: Colors.black26,
-                  size: 70,
+                IconButton(
+                  onPressed: rightImg,
+                  icon: Icon(Icons.arrow_right),
+                  iconSize: 80,
+                  color: Colors.black12,
                 ),
               ],
             ),

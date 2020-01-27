@@ -16,12 +16,14 @@ class MiddlePageContainer extends StatefulWidget {
 }
 
 class _MiddlePageContainerState extends State<MiddlePageContainer> {
-
   String mainImgPic = "assets/applewatch.jpg";
+  //String mainImgPic;
+
   Color c = Colors.black54;
+  String path_to_sent_to_RowOfWatch = "assets/applewatch.jpg";
+
   @override
   Widget build(BuildContext context) {
-    
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 5, vertical: 10),
       child: Column(
@@ -45,7 +47,15 @@ class _MiddlePageContainerState extends State<MiddlePageContainer> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              LeftPart( mainImgPath:mainImgPic ),
+              LeftPart(
+                mainImgPath: mainImgPic,
+                changeBorderOfSmallImg: (String p) {
+                  setState(() {
+                    path_to_sent_to_RowOfWatch = p;
+                    mainImgPic = p;
+                  });
+                },
+              ),
               RightPart(),
             ],
           ),
@@ -54,16 +64,14 @@ class _MiddlePageContainerState extends State<MiddlePageContainer> {
             height: 20,
           ),
           RowOfWatch(
-           changeMainImg: (String p){
-             setState(() {
-               mainImgPic = p;
-               
-             });
-           }
-          ),
+              imgToBeBordered: path_to_sent_to_RowOfWatch,
+              changeMainImg: (String p) {
+                setState(() {
+                  mainImgPic = p;
+                });
+              }),
         ],
       ),
     );
   }
 }
-

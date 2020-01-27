@@ -9,8 +9,16 @@ Widget flexible(double w) => Flexible(
     );
 
 class RowOfWatch extends StatelessWidget {
-  RowOfWatch({this.changeMainImg, Key key}) : super(key: key);
+  RowOfWatch({this.changeMainImg, this.imgToBeBordered, Key key})
+      : super(key: key);
   Function(String) changeMainImg;
+  String imgToBeBordered;
+  List<String> imgPaths = [
+    "assets/frontview.jpg",
+    "assets/normalview.png",
+    "assets/backview.jpg",
+    "assets/applewatch.jpg",
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -24,16 +32,29 @@ class RowOfWatch extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             WatchImage(
-                path: "assets/frontview.jpg", changeMainImg: changeMainImg),
+              path: imgPaths[0],
+              changeMainImg: changeMainImg,
+              borderColor: imgToBeBordered == imgPaths[0] ? Colors.blue: uni_color,
+            ),
             //flexible(10),
             WatchImage(
-                path: "assets/normalview.png", changeMainImg: changeMainImg),
+              path: imgPaths[1],
+              changeMainImg: changeMainImg,
+              borderColor: imgToBeBordered == imgPaths[1] ? Colors.blue: uni_color,
+            ),
+            //flexible(10),
+
+            WatchImage(
+              path: imgPaths[2],
+              changeMainImg: changeMainImg,
+              borderColor: imgToBeBordered == imgPaths[2] ? Colors.blue: uni_color,
+            ),
             //flexible(10),
             WatchImage(
-                path: "assets/backview.jpg", changeMainImg: changeMainImg),
-            //flexible(10),
-            WatchImage(
-                path: "assets/applewatch.jpg", changeMainImg: changeMainImg),
+              path: imgPaths[3],
+              changeMainImg: changeMainImg,
+              borderColor: imgToBeBordered == imgPaths[3] ?  Colors.blue: uni_color,
+            ),
           ],
         ),
       ),
@@ -44,17 +65,15 @@ class RowOfWatch extends StatelessWidget {
 class WatchImage extends StatefulWidget {
   String path;
   Function(String) changeMainImg;
-  WatchImage({this.path, this.changeMainImg, Key key}) : super(key: key);
+  Color borderColor;
+  WatchImage({this.path, this.changeMainImg, this.borderColor, Key key})
+      : super(key: key);
 
   @override
   _WatchImageState createState() => _WatchImageState();
 }
 
 class _WatchImageState extends State<WatchImage> {
-  //_WatchImageState({this.path, this.changeMainImg});
-  //String path;
-  //Function(String) changeMainImg;
-  Color change_border_color = uni_color;
 
   void _onTap() {
     /*
@@ -67,6 +86,7 @@ class _WatchImageState extends State<WatchImage> {
 
   @override
   Widget build(BuildContext context) {
+
     return GestureDetector(
       onTap: _onTap,
       child: Container(
@@ -75,7 +95,7 @@ class _WatchImageState extends State<WatchImage> {
           borderRadius: BorderRadius.circular(5),
           border: Border.all(
             width: 2,
-            color: change_border_color,
+            color: widget.borderColor,
           ),
         ),
         child: AspectRatio(
