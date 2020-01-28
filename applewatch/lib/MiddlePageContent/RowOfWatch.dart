@@ -8,8 +8,8 @@ Widget flexible(double w) => Flexible(
       ),
     );
 
-class RowOfWatch extends StatelessWidget {
-  RowOfWatch({this.changeMainImg, this.imgToBeBordered, Key key})
+class RowOfWatch extends StatefulWidget {
+   RowOfWatch({this.changeMainImg, this.imgToBeBordered, Key key})
       : super(key: key);
   Function(String) changeMainImg;
   String imgToBeBordered;
@@ -21,8 +21,13 @@ class RowOfWatch extends StatelessWidget {
   ];
 
   @override
+  _RowOfWatchState createState() => _RowOfWatchState();
+}
+
+class _RowOfWatchState extends State<RowOfWatch> {
+  @override
   Widget build(BuildContext context) {
-    return Align(
+      return Align(
       alignment: Alignment.topLeft,
       child: Container(
         color: uni_color,
@@ -32,28 +37,48 @@ class RowOfWatch extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             WatchImage(
-              path: imgPaths[0],
-              changeMainImg: changeMainImg,
-              borderColor: imgToBeBordered == imgPaths[0] ? Colors.blue: uni_color,
+              path: widget.imgPaths[0],
+              changeMainImg: widget.changeMainImg,
+              moveBorder: (String p){
+                setState(() {
+                widget.imgToBeBordered  = p;   
+                });
+              }, 
+              borderColor: widget.imgToBeBordered == widget.imgPaths[0] ? Colors.blue: uni_color,
             ),
             //flexible(10),
             WatchImage(
-              path: imgPaths[1],
-              changeMainImg: changeMainImg,
-              borderColor: imgToBeBordered == imgPaths[1] ? Colors.blue: uni_color,
+              path: widget.imgPaths[1],
+              changeMainImg: widget.changeMainImg,
+              moveBorder: (String p){
+                setState(() {
+                widget.imgToBeBordered  = p;   
+                });
+              }, 
+              borderColor: widget.imgToBeBordered == widget.imgPaths[1] ? Colors.blue: uni_color,
             ),
             //flexible(10),
 
             WatchImage(
-              path: imgPaths[2],
-              changeMainImg: changeMainImg,
-              borderColor: imgToBeBordered == imgPaths[2] ? Colors.blue: uni_color,
+              path: widget.imgPaths[2],
+              changeMainImg: widget.changeMainImg,
+              moveBorder: (String p){
+                setState(() {
+                widget.imgToBeBordered  = p;   
+                });
+              }, 
+              borderColor: widget.imgToBeBordered == widget.imgPaths[2] ? Colors.blue: uni_color,
             ),
             //flexible(10),
             WatchImage(
-              path: imgPaths[3],
-              changeMainImg: changeMainImg,
-              borderColor: imgToBeBordered == imgPaths[3] ?  Colors.blue: uni_color,
+              path: widget.imgPaths[3],
+              changeMainImg: widget.changeMainImg,
+              moveBorder: (String p){
+                setState(() {
+                widget.imgToBeBordered  = p;   
+                });
+              },
+              borderColor: widget.imgToBeBordered == widget.imgPaths[3] ?  Colors.blue: uni_color,
             ),
           ],
         ),
@@ -62,11 +87,14 @@ class RowOfWatch extends StatelessWidget {
   }
 }
 
+
+
 class WatchImage extends StatefulWidget {
   String path;
   Function(String) changeMainImg;
+  Function(String) moveBorder;
   Color borderColor;
-  WatchImage({this.path, this.changeMainImg, this.borderColor, Key key})
+  WatchImage({this.path, this.changeMainImg, this.moveBorder  ,this.borderColor, Key key})
       : super(key: key);
 
   @override
@@ -82,6 +110,7 @@ class _WatchImageState extends State<WatchImage> {
           change_border_color == uni_color ? Colors.blue : uni_color;
     });*/
     widget.changeMainImg(widget.path);
+     widget.moveBorder(widget.path);
   }
 
   @override
