@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:nike/nav/bigtitle.dart';
 import 'package:nike/nav/navbar.dart';
+import 'package:nike/nav/nikename.dart';
+import 'package:nike/nav/shopnow.dart';
 
 void main() => runApp(MyApp());
 
@@ -19,24 +23,52 @@ class Screen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-       height: MediaQuery.of(context).size.height,
-            width: MediaQuery.of(context).size.width,
-      padding: EdgeInsets.symmetric(
-        horizontal: 30,
-        vertical: 10,
+      height: MediaQuery.of(context).size.height,
+      width: MediaQuery.of(context).size.width,
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          fit: BoxFit.fitHeight,
+          image: AssetImage(
+            "assets/nike.jpg",
+          ),
+        ),
       ),
       child: Stack(
         children: <Widget>[
-          Container(
-           
-            child: Image.asset(
-              "assets/nike.jpg",
-              fit: BoxFit.fitHeight,
+          Positioned(
+            right: 200,
+            child: NavBar(),
+          ),
+          Positioned(
+            left: 200,
+            top: 1,
+            child: NikeName(),
+          ),
+          Positioned(
+            left: 450,
+            top: 200,
+            child: BigTitle(),
+          ),
+          Positioned(
+            left: 620,
+            bottom: 5,
+            child: Container(
+              width: 80,
+              height: 30,
+              child: Text(
+                "NIKE AIR",
+                style: GoogleFonts.anton(
+                  textStyle: TextStyle(
+                    color: Colors.white,
+                    fontSize: 20,
+                  ),
+                ),
+              ),
             ),
           ),
           Positioned(
-            right: 10,
-            child: NavBar(),
+            left: 200,
+            child: ShopNow(),
           ),
         ],
       ),
